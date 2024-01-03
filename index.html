@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/dat.gui"></script>
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #screenshot {
+        position: absolute;
+        color: white;
+        top: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        font-family: monospace;
+        justify-content: center;
+        align-items: center;
+        left: 0;
+      }
+      #screenshot img {
+        height: 50px;
+        width: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <div id="screenshot">
+      <img src="./assets/download.png" alt="" />
+      <div>Download Image</div>
+    </div>
+    <script src="./async.min.js"></script>
+    <script src="./script.js" type="module"></script>
+  </body>
+</html>

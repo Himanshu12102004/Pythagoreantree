@@ -321,7 +321,7 @@ function downloadScreenshot() {
 
   link.href = screenshotDataUrl;
 
-  link.download = "screenshot.png";
+  link.download = `${innerWidth}px*${innerHeight}px-himanshu-pythagoreanTree`;
 
   document.body.appendChild(link);
   link.click();

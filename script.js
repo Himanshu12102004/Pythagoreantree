@@ -39,7 +39,7 @@ function main(loadErrors, shaders) {
   const program = createProgram(fragmentShader, vertexShader, gl);
   const controllerFolder = new dat.GUI();
   const controllers = {
-    rootLength: innerWidth > 500 ? 428 : 100,
+    rootLength: innerWidth > 500 ? 400 : 200,
     angle: 40,
     level: 10,
   };
@@ -67,8 +67,7 @@ function main(loadErrors, shaders) {
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.uniform2fv(viewportDimensionsLocation, [innerWidth, innerHeight], 0, 2);
   });
-
-  controllerFolder.add(controllers, "angle", -90, 90).onChange(() => {
+  function angleChange() {
     angle = (Math.PI * controllers.angle) / 180;
     binary.root.data.origin.x = -controllers.rootLength / 2;
     binary.root.data.length = controllers.rootLength;
@@ -84,6 +83,9 @@ function main(loadErrors, shaders) {
       new Float32Array(bufferArray),
       gl.STATIC_DRAW
     );
+  }
+  controllerFolder.add(controllers, "angle", -90, 90).onChange(() => {
+    angleChange();
   });
   controllerFolder.add(controllers, "rootLength", 50, 1000).onChange(() => {
     binary.root.data.origin.x = -controllers.rootLength / 2;
@@ -288,11 +290,12 @@ function main(loadErrors, shaders) {
     gl
   );
   binary.traverse(binary.root);
-
+  let t = 0;
   function gameLoop() {
     requestAnimationFrame(gameLoop);
-
-    changeColor();
+    t += 0.1;
+    // controllers.angle = 5 * Math.sin(t);
+    // angleChange();
     gl.clearColor(0, 0, 0, 1);
     gl.clear(gl.DEPTH_BUFFER_BIT | gl.COLOR_BUFFER_BIT);
     gl.bindVertexArray(vao);
